@@ -4,6 +4,7 @@ import 'package:mticks/home/dashboard.dart';
 import 'package:mticks/home/profile.dart';
 import 'package:mticks/home/routes.dart';
 import 'package:mticks/home/wallet.dart';
+import 'package:mticks/receipts.dart';
 
 import '../services/storage.dart';
 import 'Scanner.dart';
@@ -114,7 +115,10 @@ class _AppState extends State<App> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              print("HELLO");
+              Navigator.push(context, MaterialPageRoute(builder: (e) => const ReceiptsPage(),),);
+            },
             icon: const Icon(Icons.list),
           ),
           IconButton(
