@@ -10,7 +10,7 @@ class Qr extends StatefulWidget {
 class _QrState extends State<Qr> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
 
     );
   }

@@ -1,5 +1,4 @@
 
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,9 +12,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-   TextEditingController _userName = TextEditingController();
-   TextEditingController _userEmail = TextEditingController();
-   TextEditingController _userPassword = TextEditingController();
+   final TextEditingController _userName = TextEditingController();
+   final TextEditingController _userEmail = TextEditingController();
+   final TextEditingController _userPassword = TextEditingController();
    bool _loading = false;
    void save() async {
      setState(() {
@@ -42,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _loading ? Center(
+        body: _loading ? const Center(
           child: CircularProgressIndicator(),
         ): SafeArea(
           child: Padding(
@@ -111,11 +110,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             Fluttertoast.showToast(msg: error.toString());
                         }
                       },
-                      child: const Text("REGISTER NOW"),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateColor.resolveWith((states) => Colors.redAccent),
                           foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white)
                       ),
+                      child: const Text("REGISTER NOW"),
                     ),
                   ),
                   const SizedBox(
@@ -131,10 +130,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () {
                         Navigator.pushReplacementNamed(context, 'login');
                       },
-                      child: const Text("Already Have an Account?"),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateColor.resolveWith((states) => Colors.yellow)
                       ),
+                      child: const Text("Already Have an Account?"),
                     ),
                   ),
                 ],

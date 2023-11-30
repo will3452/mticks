@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,8 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _userEmail = TextEditingController();
-  TextEditingController _userPassword = TextEditingController();
+  final TextEditingController _userEmail = TextEditingController();
+  final TextEditingController _userPassword = TextEditingController();
 
   bool _loading = false;
 
@@ -55,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _loading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : SafeArea(
@@ -63,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         "M-TICKS",
                         style: TextStyle(
                           color: Colors.redAccent,
@@ -71,34 +70,34 @@ class _LoginPageState extends State<LoginPage> {
                           fontSize: 32,
                         ),
                       ),
-                      Text("Mobile Bus Ticketing System",
+                      const Text("Mobile Bus Ticketing System",
                           style: TextStyle(
                             color: Colors.black54,
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           label: Text("Email"),
                           icon: Icon(Icons.email),
                         ),
                         controller: _userEmail,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           label: Text("Password"),
                           icon: Icon(Icons.password),
                         ),
                         obscureText: true,
                         controller: _userPassword,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SizedBox(
@@ -113,22 +112,22 @@ class _LoginPageState extends State<LoginPage> {
                               Fluttertoast.showToast(msg: error.toString());
                             }
                           },
-                          child: Text("LOGIN"),
                           style: ButtonStyle(
                               backgroundColor: MaterialStateColor.resolveWith(
                                   (states) => Colors.redAccent),
                               foregroundColor: MaterialStateColor.resolveWith(
                                   (states) => Colors.white)),
+                          child: const Text("LOGIN"),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       MaterialButton(
                         onPressed: () {},
-                        child: Text("OR"),
+                        child: const Text("OR"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SizedBox(
@@ -137,10 +136,10 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             Navigator.pushReplacementNamed(context, 'register');
                           },
-                          child: Text("REGISTER"),
                           style: ButtonStyle(
                               backgroundColor: MaterialStateColor.resolveWith(
                                   (states) => Colors.yellow)),
+                          child: const Text("REGISTER"),
                         ),
                       ),
                     ],

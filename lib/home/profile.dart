@@ -48,30 +48,30 @@ class _ProfilePageState extends State<ProfilePage> {
         width: double.infinity,
         child: Column(
           children: [
-            Text("Basic Information: "),
-            SizedBox(
+            const Text("Basic Information: "),
+            const SizedBox(
               height: 32,
             ),
-            CircleAvatar(
-              child: Text("W"),
+            const CircleAvatar(
               radius: 32,
+              child: Text("W"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             ListTile(
-              title: Text("Name"),
-              trailing: Text("${_userName}"),
+              title: const Text("Name"),
+              trailing: Text("$_userName"),
             ),
             ListTile(
-              title: Text("Email"),
-              trailing: Text("${_userEmail}"),
+              title: const Text("Email"),
+              trailing: Text("$_userEmail"),
             ),
             ListTile(
-              title: Text("Account Type"),
-              trailing: Text("${_userType}"),
+              title: const Text("Account Type"),
+              trailing: Text("$_userType"),
             ),
-            QrImageView(data: "${_userId}", size: 150),
+            QrImageView(data: "$_userId", size: 150),
           ],
         ),
       ),

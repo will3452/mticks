@@ -1,7 +1,5 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:mticks/auth/login.dart';
 import 'package:mticks/auth/register.dart';
 import 'package:mticks/home/app.dart';
@@ -25,13 +23,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: const LoginPage(),
       routes: {
-        "login": (_) => LoginPage(),
-        "register": (_) => RegisterPage(),
-        "home": (_) => App(),
-        'qr': (_) => Qr(),
-        'booking': (_) => Booking(),
+        "login": (_) => const LoginPage(),
+        "register": (_) => const RegisterPage(),
+        "home": (_) => const App(),
+        'qr': (_) => const Qr(),
+        'booking': (_) => const Booking(),
       },
     );
   }

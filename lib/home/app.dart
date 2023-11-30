@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mticks/booking_directory.dart';
 import 'package:mticks/home/buses.dart';
 import 'package:mticks/home/dashboard.dart';
 import 'package:mticks/home/profile.dart';
@@ -17,7 +18,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  var _menu = [
+  final _menu = [
     const ProfilePage(),
     const DashboardPage(),
     const WalletPage(),
@@ -76,29 +77,38 @@ class _AppState extends State<App> {
               ),
             ),
              ListTile(
-              leading: Icon(Icons.directions_bus_filled),
-              title: Text("BUSES"),
+              leading: const Icon(Icons.directions_bus_filled),
+              title: const Text("BUSES"),
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => Buses())
+                    MaterialPageRoute(builder: (_) => const Buses())
                 );
               },
             ),
              ListTile(
-              leading: Icon(Icons.route),
-              title: Text("ROUTES"),
+              leading: const Icon(Icons.route),
+              title: const Text("ROUTES"),
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => Routes())
+                    MaterialPageRoute(builder: (_) => const Routes())
+                );
+              },
+            ),
+            if (_userType == 'DRIVER') ListTile(
+              leading: const Icon(Icons.event_seat),
+              title: const Text("BOOKING RECORDS"),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const BookingDirectoryPage())
                 );
               },
             ),
             if (_userType == 'CONDUCTOR') ListTile(
-              leading: Icon(Icons.scanner),
-              title: Text("SCAN"),
+              leading: const Icon(Icons.scanner),
+              title: const Text("SCAN"),
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => Scanner())
+                    MaterialPageRoute(builder: (_) => const Scanner())
                 );
               },
             ),
@@ -116,7 +126,6 @@ class _AppState extends State<App> {
         actions: [
           IconButton(
             onPressed: () {
-              print("HELLO");
               Navigator.push(context, MaterialPageRoute(builder: (e) => const ReceiptsPage(),),);
             },
             icon: const Icon(Icons.list),

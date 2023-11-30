@@ -1,14 +1,11 @@
 
-import 'dart:ffi';
 
-import 'package:d_chart/commons/data_model.dart';
-import 'package:d_chart/numeric/line.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:mticks/home/booking.dart';
+import 'package:mticks/bookings/SetDateAndDestination.dart';
 import 'package:mticks/home/ticket_details.dart';
 
 import '../services/api.dart';
@@ -64,7 +61,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
 
     setState(() {
-      _bookings = response!.data.where((e) => '${e['user_id']}' == _id ).toList();
+      _bookings = response.data.where((e) => '${e['user_id']}' == _id ).toList();
       _fetchingBookings = false;
     });
   }
@@ -184,7 +181,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(context, 'booking');
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const SetDateAndDestinationPage()));
         },
         child: const Icon(Icons.playlist_add_check),
       ),
@@ -314,7 +311,7 @@ class _DashboardPageState extends State<DashboardPage> {
               fontWeight: FontWeight.bold,
               color: Colors.grey,
             ),),
-            _fetchingBookings ? LinearProgressIndicator():SizedBox(
+            _fetchingBookings ? const LinearProgressIndicator():SizedBox(
               height: MediaQuery.of(context).size.height * .4,
               child: ListView.builder(itemBuilder: (_, index) {
                 return ListTile(

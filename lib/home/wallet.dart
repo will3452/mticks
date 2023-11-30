@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mticks/services/api.dart';
 import 'package:mticks/services/storage.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({Key? key}) : super(key: key);
@@ -54,13 +53,13 @@ class _WalletPageState extends State<WalletPage> {
 
     setState(() {
       _transactions = (response.data).where((element) => "${element['user_id']}" == _userId).toList();
-      _transactions.forEach((element) {
+      for (var element in _transactions) {
         if (element['bound'] == 'IN') {
           _balance += double.parse(element['amount']);
         } else {
           _balance -= double.parse(element['amount']);
         }
-      });
+      }
 
       _loading = false;
     });
@@ -81,8 +80,8 @@ class _WalletPageState extends State<WalletPage> {
               const Text("Your current Balance:"),
                ! _loading ? Text(
                 "₱ ${_balance.toStringAsFixed(2)}",
-                style: TextStyle(fontSize: 32),
-              ): Text("--", style: TextStyle(fontSize: 32),),
+                style: const TextStyle(fontSize: 32),
+              ): const Text("--", style: TextStyle(fontSize: 32),),
               const SizedBox(
                 height: 20,
               ),
@@ -113,7 +112,7 @@ class _WalletPageState extends State<WalletPage> {
                   var item =_transactions[index];
                   return ListTile(
                     dense: true,
-                    leading: item['bound'] == 'IN' ? Icon(Icons.add, color: Colors.green): Icon(Icons.remove, color: Colors.red,),
+                    leading: item['bound'] == 'IN' ? const Icon(Icons.add, color: Colors.green): const Icon(Icons.remove, color: Colors.red,),
                     title: Text("${item['amount']}"),
                     subtitle: Text("${item['type']}"),
                     trailing: Text("${item['created_at']}"),

@@ -25,28 +25,28 @@ class _TicketDetailsState extends State<TicketDetails> {
             children: [
               QrImageView(data: widget.id, size: 150),
               ListTile(
-                title: Text("Route"),
-                trailing: Text("${widget!.payload['from']} - ${widget!.payload['to']}"),
+                title: const Text("Route"),
+                trailing: Text("${widget.payload['from']} - ${widget.payload['to']}"),
               ),
               ListTile(
-                title: Text("Date"),
-                trailing: Text("${widget!.payload['date']}"),
+                title: const Text("Date"),
+                trailing: Text("${widget.payload['date']}"),
               ),
               ListTile(
-                title: Text("Time"),
-                trailing: Text("${widget!.payload['time']}"),
+                title: const Text("Time"),
+                trailing: Text("${widget.payload['time']}"),
               ),
               ListTile(
-                title: Text("Total Fare"),
-                trailing: Text("₱ ${(int.parse(widget!.payload['fare']) * widget!.payload['qty']).toStringAsFixed(2)}"),
+                title: const Text("Total Fare"),
+                trailing: Text("₱ ${(int.parse(widget.payload['fare']) * widget.payload['qty']).toStringAsFixed(2)}"),
               ),
               ListTile(
-                title: Text("Quantity"),
-                trailing: Text("${widget!.payload['qty']}"),
+                title: const Text("Quantity"),
+                trailing: Text("${widget.payload['qty']}"),
               ),
               ListTile(
-                title: Text("Status"),
-                trailing: Text("${widget!.payload['status']}"),
+                title: const Text("Status"),
+                trailing: Text("${widget.payload['status']}"),
               ),
             ],
           ),

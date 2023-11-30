@@ -16,7 +16,7 @@ class Booking extends StatefulWidget {
 class _BookingState extends State<Booking> {
   var _date = "--/--/--";
   var _time = "--:--";
-  var _route = null;
+  var _route;
   var _fare = 0;
   var _qty = 0;
   var _token;
@@ -86,7 +86,7 @@ class _BookingState extends State<Booking> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Booking form"),
+        title: const Text("Booking form"),
       ),
       body: SafeArea(
         child: Padding(
@@ -95,47 +95,49 @@ class _BookingState extends State<Booking> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("SELECT DATE:"),
+                const Text("SELECT DATE:"),
                 InkWell(
                   child: Text(
-                    "$_date",
-                    style: TextStyle(fontSize: 28),
+                    _date,
+                    style: const TextStyle(fontSize: 28),
                   ),
                   onTap: () async {
                     var date = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(Duration(days: 10)));
+                        lastDate: DateTime.now().add(const Duration(days: 10)));
                     setState(() {
-                      _date = "${date!.month}/${date!.day}/${date!.year}";
+                      _date = "${date!.month}/${date.day}/${date.year}";
                     });
                   },
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Text("SELECT TIME:"),
+                const Text("SELECT TIME:"),
                 InkWell(
                   child: Text(
-                    "$_time",
-                    style: TextStyle(fontSize: 28),
+                    _time,
+                    style: const TextStyle(fontSize: 28),
                   ),
                   onTap: () async {
                     var time = await showTimePicker(
                         context: context, initialTime: TimeOfDay.now());
                     setState(() {
-                      _time = "${time!.hour}:${time!.minute}";
+                      _time = "${time!.hour}:${time.minute}";
                     });
                   },
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Text("SELECT ROUTE: "),
+                const Text("SELECT ROUTE: "),
                 DropdownButton(
                   items: _routes
                       .map((e) => DropdownMenuItem(
+                            value: e['id'],
+                            enabled: !(e['id'] == _route),
                             child: Text(
                               "${e['name']}",
                               style: TextStyle(
@@ -143,14 +145,12 @@ class _BookingState extends State<Booking> {
                                       ? FontWeight.bold
                                       : FontWeight.w300),
                             ),
-                            value: e['id'],
-                            enabled: !(e['id'] == _route),
                           ))
                       .toList(),
                   onChanged: (val) {
                     setState(() {
                       _route = val;
-                      _fare = _routes!.where((element) => _route == element['id']).toList().first['fare'];
+                      _fare = _routes.where((element) => _route == element['id']).toList().first['fare'];
                     });
                   },
                   value: _route,
@@ -159,13 +159,13 @@ class _BookingState extends State<Booking> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text("QUANTITY:"),
+                const Text("QUANTITY:"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "$_qty",
-                      style: TextStyle(fontSize: 25),
+                      style: const TextStyle(fontSize: 25),
                     ),
                     Row(
                       children: [
@@ -175,7 +175,7 @@ class _BookingState extends State<Booking> {
                                 _qty++;
                               });
                             },
-                            icon: Icon(Icons.add)),
+                            icon: const Icon(Icons.add)),
                         IconButton(
                           onPressed: () {
                             setState(() {
@@ -183,7 +183,7 @@ class _BookingState extends State<Booking> {
                               _qty--;
                             });
                           },
-                          icon: Icon(Icons.remove),
+                          icon: const Icon(Icons.remove),
                         ),
                       ],
                     )
@@ -192,14 +192,14 @@ class _BookingState extends State<Booking> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text("TOTAL FARE:"),
+                const Text("TOTAL FARE:"),
                 Text(
                   "₱  ${_route != null ? (_fare * _qty).toStringAsFixed(2) : 0.toStringAsFixed(2)}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 32,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 SizedBox(
@@ -209,7 +209,7 @@ class _BookingState extends State<Booking> {
 
                         _submitBooking();
                       },
-                      child: Text("SUBMIT"),),
+                      child: const Text("SUBMIT"),),
                 )
               ],
             ),

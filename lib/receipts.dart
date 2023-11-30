@@ -1,9 +1,7 @@
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mticks/home/app.dart';
 import 'package:mticks/services/api.dart';
 
@@ -17,8 +15,8 @@ class ReceiptsPage extends StatefulWidget {
 }
 
 class _ReceiptsPageState extends State<ReceiptsPage> {
-  TextEditingController _reference = TextEditingController(text: '');
-  PlatformFile? _file = null;
+  final TextEditingController _reference = TextEditingController(text: '');
+  PlatformFile? _file;
   Future<void> submit() async {
     print("reference >> ${_reference.text}");
     try {
@@ -39,7 +37,7 @@ class _ReceiptsPageState extends State<ReceiptsPage> {
 
       // set up the button
       Widget okButton = TextButton(
-        child: Text("OK"),
+        child: const Text("OK"),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (e) => const App()));
         },
@@ -47,8 +45,8 @@ class _ReceiptsPageState extends State<ReceiptsPage> {
 
       // set up the AlertDialog
       AlertDialog alert = AlertDialog(
-        title: Text("Success"),
-        content: Text("Success, Your request has been submitted, please wait for approval."),
+        title: const Text("Success"),
+        content: const Text("Success, Your request has been submitted, please wait for approval."),
         actions: [
           okButton,
         ],
@@ -72,17 +70,17 @@ class _ReceiptsPageState extends State<ReceiptsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Receipts"),
+        title: const Text("Receipts"),
       ),
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Upload New Receipt",
                   style: TextStyle(
                     fontSize: 19,
@@ -90,11 +88,11 @@ class _ReceiptsPageState extends State<ReceiptsPage> {
                 ),
                 TextField(
                   controller: _reference,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text("Reference No."),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 GestureDetector(
@@ -107,26 +105,24 @@ class _ReceiptsPageState extends State<ReceiptsPage> {
 
                     print("file picked >> ${result!.files.first.path}");
 
-                    if (result != null) {
-                      _file = result.files.first;
-                      print("_file ${_file}");
-                    }
-                  },
+                    _file = result.files.first;
+                    print("_file $_file");
+                                    },
                   child: Text( _file != null ? _file!.path ?? '' :  "Click here to choose file.",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w900,
                       color: Colors.redAccent,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
                     onPressed: () {
                       submit();
                     },
-                    child: Text("Submit"))
+                    child: const Text("Submit"))
               ],
             ),
           ),

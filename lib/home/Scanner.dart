@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -46,14 +45,14 @@ class _ScannerState extends State<Scanner> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Text("SELECT TRANSACTION: "),
+              const Text("SELECT TRANSACTION: "),
               DropdownButton(
-                items: [
-                DropdownMenuItem(child: Text("LOAD"), value: "LOAD",),
-                DropdownMenuItem(child: Text("PAYMENT"), value: "PAYMENT",),
+                items: const [
+                DropdownMenuItem(value: "LOAD",child: Text("LOAD"),),
+                DropdownMenuItem(value: "PAYMENT",child: Text("PAYMENT"),),
               ],
                 onChanged: (value){
                   setState(() {
@@ -61,12 +60,12 @@ class _ScannerState extends State<Scanner> {
                   });
               }, isExpanded: true,
               value: _transaction ?? 'LOAD'),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextField(
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Enter Amount',
                 ),
                 onChanged: (value) {
@@ -75,7 +74,7 @@ class _ScannerState extends State<Scanner> {
                   });
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
@@ -167,7 +166,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       //   print('result >> ${result!.code}');
       // });
 
-      if (scanData!.code != null) {
+      if (scanData.code != null) {
         controller.stopCamera();
         setState(() {
           _count ++;
@@ -181,7 +180,7 @@ class _QRViewExampleState extends State<QRViewExample> {
           "bound": widget.transaction == 'LOAD' ? 'IN': 'OUT',
           'type': widget.transaction,
           'amount': widget.amount,
-          'user_id': scanData!.code,
+          'user_id': scanData.code,
           'status': 'SUCCESS',
         },
       };
@@ -197,7 +196,7 @@ class _QRViewExampleState extends State<QRViewExample> {
 
         Fluttertoast.showToast(msg: "Done!");
 
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Scanner()));
+        Navigator.push(context, MaterialPageRoute(builder: (_) => const Scanner()));
 
       }
 
