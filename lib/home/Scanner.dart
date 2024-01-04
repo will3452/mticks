@@ -173,6 +173,8 @@ class _QRViewExampleState extends State<QRViewExample> {
         });
       }
 
+      print("scanData -> ${scanData.code}");
+
       dynamic data = {
         "model": "Transaction",
         "method": "create",

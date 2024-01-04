@@ -306,11 +306,18 @@ class _DashboardPageState extends State<DashboardPage> {
               height: 10,
             ),
 
-            Text("BOOKINGS (${_bookings.length})", style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            ),),
+            Row(
+             children: [
+               Icon(Icons.note),
+               SizedBox(
+                 width: 10,
+               ),
+               Text("BOOKINGS (${_bookings.length})", style: const TextStyle(
+                 fontSize: 12,
+                 color: Colors.grey,
+               ),),
+             ],
+            ),
             _fetchingBookings ? const LinearProgressIndicator():SizedBox(
               height: MediaQuery.of(context).size.height * .4,
               child: ListView.builder(itemBuilder: (_, index) {

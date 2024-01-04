@@ -38,7 +38,8 @@ class _LoginPageState extends State<LoginPage> {
       await storage.write(key: 'userEmail', value: data.data['user']['email']);
       await storage.write(key: 'userId', value: "${data.data['user']['id']}");
       await storage.write(key: 'userToken', value: data.data['token']);
-      print("data ${data.data['token']}");
+      await storage.write(key: 'email_verified_at', value: data.data['user']['email_verified_at']);
+      print("email_verified_at-> ${data.data['user']['email_verified_at']}");
       Navigator.pushReplacementNamed(context, 'home');
     } catch (error) {
       Fluttertoast.showToast(msg: error.toString());

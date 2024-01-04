@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mticks/booking_directory.dart';
+import 'package:mticks/feedback.dart';
 import 'package:mticks/home/buses.dart';
 import 'package:mticks/home/dashboard.dart';
 import 'package:mticks/home/profile.dart';
 import 'package:mticks/home/routes.dart';
 import 'package:mticks/home/wallet.dart';
+import 'package:mticks/otp.dart';
 import 'package:mticks/receipts.dart';
+import 'package:mticks/terms_and_condition.dart';
+import 'package:mticks/trip_histories.dart';
 
 import '../services/storage.dart';
 import 'Scanner.dart';
@@ -27,6 +32,7 @@ class _AppState extends State<App> {
   String? _userName;
   String? _userEmail;
   String? _userId;
+  String? _email_verified_at;
   String? _userType;
 
   void _loadAccount() async {
@@ -34,14 +40,18 @@ class _AppState extends State<App> {
     String? userType = await storage.read(key: 'userType');
     String? userEmail = await storage.read(key: 'userEmail');
     String? userId = await storage.read(key: 'userId');
+    String? email_verified_at = await storage.read(key: 'email_verified_at');
 
     setState(() {
       _userEmail = userEmail;
       _userName = userName;
       _userId = userId;
       _userType = userType;
+      _email_verified_at = email_verified_at;
     });
   }
+
+
 
   @override
   void initState() {
@@ -112,6 +122,33 @@ class _AppState extends State<App> {
                 );
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.feedback),
+              title: const Text("FEEDBACK"),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const FeedbackPage())
+                );
+              }
+            ),
+            ListTile(
+                leading: const Icon(Icons.history),
+                title: const Text("TRIP HISTORY"),
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const TripPage())
+                  );
+                }
+            ),
+            ListTile(
+              leading: const Icon(Icons.directions_bus_filled),
+              title: const Text("TERMS & CONDITIONS"),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const TermsAndCondition())
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -139,12 +176,16 @@ class _AppState extends State<App> {
         ],
       ),
       body: SafeArea(
-        child: _menu[_currentIndex],
+        child: _email_verified_at == null ? OtpPage() : _menu[_currentIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10,
         currentIndex: _currentIndex,
         onTap: (index) {
+          if (_email_verified_at == null) {
+            Fluttertoast.showToast(msg: "Please verify your email.");
+            return;
+          }
           setState(() {
             _currentIndex = index;
           });
@@ -170,7 +211,8 @@ class _AppState extends State<App> {
               activeIcon: Icon(
                 Icons.wallet,
                 size: 40,
-              )),
+              ),
+          ),
         ],
       ),
     );
